@@ -90,13 +90,13 @@ public class Main {
             }
         }
         // Create the loop for the days ongoing
-        boolean currentlyScanning = false;
-        int daysLeftForScanning = 0;
+        boolean currentlySigningUp = false;
+        int daysLeftForSigningUp = 0;
         for (daysleft = scanningDays; daysleft > 0; daysleft--) {
-            if (daysLeftForScanning > 0) {
-                daysLeftForScanning--;
+            if (daysLeftForSigningUp > 0) {
+                daysLeftForSigningUp--;
             } else {
-                currentlyScanning = false;
+                currentlySigningUp = false;
             }
 
             // Weighting The libraries
@@ -116,9 +116,10 @@ public class Main {
             arrayOfWeightedLibraries = WeightCalculation.getLibraryQue(libraryList, daysleft, averageScoreOfBooks);
 
             //Sign up a library from the que
-            if (!currentlyScanning) {
+            if (!currentlySigningUp) {
 //                arrayOfWeightedLibraries[0].sign
-
+                //SIGN UP LIBRARY
+                daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
             }
 
             for (int i = 0; i < files.length; i++) {
