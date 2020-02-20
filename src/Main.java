@@ -10,13 +10,14 @@ public class Main {
     static int books;
     static int libraries;
     static int scanningDays;
+    static int leftDaysScanning;
     static int daysleft;
     static double averageScoreOfBooks;
 
     public static void main(String[] args) throws IOException, FileNotFoundException {
 
-        //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
-        String[] files = {"a_example.txt"};
+//        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
+        String[] files= {"a_example.txt"};
 //        String[] files= {"a_example.txt", "b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
@@ -31,6 +32,7 @@ public class Main {
             books = fin.nextInt();
             libraries = fin.nextInt();
             scanningDays = fin.nextInt();
+            leftDaysScanning = scanningDays;
             fin.nextLine();
 
             String input = fin.nextLine();    // get the entire line after the prompt
@@ -55,13 +57,38 @@ public class Main {
                     fin.nextLine();
                 }
             }
-
         }
 
         for (int i = 0; i < libraryList.size(); i++) {
             System.out.println(libraryList.get(i));
         }
 
+        /*
+            We need to sort the arraylist of libraries
+         */
+        for (int j = 0; j < libraryList.size(); j++) {
+            if (leftDaysScanning < libraryList.get(j).getSignUpTime()) {
+                continue;
+            } else {
+                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
+                libraryList.get(j).signed();
+            }
+        }
+
+        for (int m = 0; m < libraryList.size(); m++) {
+            if (libraryList.get(m).isSigned) {
+                // You can scan books here
+                for (int k = 0; k < libraryList.get(m).getBooks().size(); k++) {
+                    int bookId = Math.toIntExact(libraryList.get(m).getBooks().get(k).getID());
+                    if (bookScores[bookId] != null) {
+                        bookScores[bookId] = null;
+                        libraryList.get(m).addScannedBook(libraryList.get(m).getBooks().get(k));
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        }
         // Create the loop for the days ongoing
         boolean currentlySigningUp = false;
         int daysLeftForSigningUp = 0;

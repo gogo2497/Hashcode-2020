@@ -8,15 +8,25 @@ public class Library {
     int signUpTime;
     int booksPerScan;
     int amountOfBooks;
+    boolean isSigned = false;
     int ID;
     double weight;
     ArrayList<Book> books = new ArrayList<>();
+    ArrayList<Book> scannedBooks = new ArrayList<>();
 
     public Library(String amountOfBooks, String signUpTime, String booksPerScan, int ID) {
         this.signUpTime = Integer.parseInt(signUpTime);
         this.booksPerScan = Integer.parseInt(booksPerScan);
         this.amountOfBooks = Integer.parseInt(amountOfBooks);
         this.ID = ID;
+    }
+
+    public void signed() {
+        isSigned = true;
+    }
+
+    public void signup(Library library, int scanningDays) {
+        scanningDays -= library.signUpTime;
     }
 
     public int getSignUpTime() {
@@ -53,6 +63,10 @@ public class Library {
 
     public void addBook(Book book) {
         books.add(book);
+    }
+
+    public void addScannedBook(Book book) {
+        scannedBooks.add(book);
     }
 
     public void sortBooksByScore() {
