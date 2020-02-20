@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws IOException, FileNotFoundException {
 
         //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
-        String[] files= {"a_example.txt"};
+        String[] files = {"a_example.txt"};
 //        String[] files= {"a_example.txt", "b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Main {
             String input = fin.nextLine();    // get the entire line after the prompt
             bookScores = input.split(" ");
 
-            for(int x=0; x < libraries; x++) {
+            for (int x = 0; x < libraries; x++) {
                 input = fin.nextLine();    // get the entire line after the prompt
                 String[] libraryInfo = input.split(" ");
 
@@ -65,8 +65,8 @@ public class Main {
         // Create the loop for the days ongoing
         boolean currentlyScanning = false;
         int daysLeftForScanning = 0;
-        for(daysleft = scanningDays; daysleft > 0; daysleft--){
-            if ( daysLeftForScanning > 0 ){
+        for (daysleft = scanningDays; daysleft > 0; daysleft--) {
+            if (daysLeftForScanning > 0) {
                 daysLeftForScanning--;
             } else {
                 currentlyScanning = false;
@@ -83,28 +83,29 @@ public class Main {
                 }
             }
             //Update Average score of books left
-            averageScoreOfBooks =  sum /averageScoreOfBooks;
+            averageScoreOfBooks = sum / averageScoreOfBooks;
             // Create library que
             Double[] arrayOfWeightedLibraries = new Double[libraryList.size()];
-            arrayOfWeightedLibraries = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
+            arrayOfWeightedLibraries = WeightCalculation.getLibraryQue(libraryList, daysleft, averageScoreOfBooks);
 
             //Sign up a library from the que
-            if( ! currentlyScanning){
+            if (!currentlyScanning) {
 //                arrayOfWeightedLibraries[0].sign
 
             }
 
-        for(int i=0; i<files.length;i++) {
+            for (int i = 0; i < files.length; i++) {
 
-            FileWriter myWriter = new FileWriter(i + ".txt");
-            myWriter.write("Amount of libs to be signed up\n");
+                FileWriter myWriter = new FileWriter(i + ".txt");
+                myWriter.write("Amount of libs to be signed up\n");
 
-            //repeat
+                //repeat
 //            for (int j = 0; j < listOfLibraries; j++) {
 //                myWriter.write("which lib and how many books?\n");
 //                myWriter.write("scan these books from the above lib\n");
 //            }
-            myWriter.close();
+                myWriter.close();
+            }
         }
     }
 }
