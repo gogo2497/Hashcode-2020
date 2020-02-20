@@ -12,8 +12,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
-//        String[] files= {"a_example.txt"};
-        String[] files= {"a_example.txt", "b_read_on.txt"};
+        String[] files= {"a_example.txt"};
+//        String[] files= {"a_example.txt", "b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
 
@@ -45,6 +45,7 @@ public class Main {
                     for (int j = 0; j < booksInLibrary.length; j++) {
                         lib.addBook(new Book(booksInLibrary[j], bookScores[j]));
                     }
+                    lib.sortBooksByScore();
                 } else {
                     fin.nextLine();
                 }
@@ -55,6 +56,12 @@ public class Main {
         for (int i=0; i<libraryList.size(); i++) {
             System.out.println(libraryList.get(i));
         }
+
+
+
+        //File writer
+
+
 
     }
 }
