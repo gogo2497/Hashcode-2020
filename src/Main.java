@@ -18,8 +18,8 @@ public class Main {
     public static void main(String[] args) throws IOException, FileNotFoundException {
 
 //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
-        String[] files= {"a_example.txt"};
-//        String[] files= {"a_example.txt", "b_read_on.txt"};
+//        String[] files= {"a_example.txt"};
+        String[] files= {"b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
         String[] bookScores = null;
@@ -120,8 +120,11 @@ public class Main {
                 WeightCalculation.assignAllLibrariesWeights(libraryList, daysleft, averageScoreOfBooks);
 //                arrayOfWeightedLibraries[0].sign
                 //SIGN UP LIBRARY
+                Collections.sort(libraryList);
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
                 libraryList.get(0).signed();
+
+
             }
 
             for (int i = 0; i < files.length; i++) {

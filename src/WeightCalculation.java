@@ -26,7 +26,6 @@ public abstract class WeightCalculation {
             assignLibraryWeight(libraryList.get(i), daysLeft, AverageScoreOfBooks);
         }
         // Sort the array
-        Arrays.sort(arrayOfWeights, Collections.reverseOrder());
         }
 
 
