@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -66,14 +67,14 @@ public class Main {
         /*
             We need to sort the arraylist of libraries
          */
-        for (int j = 0; j < libraryList.size(); j++) {
-            if (leftDaysScanning < libraryList.get(j).getSignUpTime()) {
-                continue;
-            } else {
-                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
-                libraryList.get(j).signed();
-            }
-        }
+//        for (int j = 0; j < libraryList.size(); j++) {
+//            if (leftDaysScanning < libraryList.get(j).getSignUpTime()) {
+//                continue;
+//            } else {
+//                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
+//                libraryList.get(j).signed();
+//            }
+//        }
 
         for (int m = 0; m < libraryList.size(); m++) {
             if (libraryList.get(m).isSigned) {
@@ -120,18 +121,34 @@ public class Main {
 //                arrayOfWeightedLibraries[0].sign
                 //SIGN UP LIBRARY
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
+                Collections.sort(libraryList);
             }
+
+
+
+
+
+
+
+
+
+
+
 
             for (int i = 0; i < files.length; i++) {
 
                 FileWriter myWriter = new FileWriter(i + ".txt");
-                myWriter.write("Amount of libs to be signed up\n");
+                myWriter.write(libraryList.size() + "\n");
 
                 //repeat
-//            for (int j = 0; j < listOfLibraries; j++) {
-//                myWriter.write("which lib and how many books?\n");
-//                myWriter.write("scan these books from the above lib\n");
-//            }
+                for (int j = 0; j < libraryList.size(); j++) {
+                    myWriter.write(libraryList.get(j).ID);
+                    myWriter.write(" " + libraryList.get(j).scannedBooks.size() + "\n");
+                    for (int k = 0; k < libraryList.get(j).scannedBooks.size(); k++) {
+                        myWriter.write(Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID));
+                    }
+                    myWriter.write("\n");
+                }
                 myWriter.close();
             }
         }

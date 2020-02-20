@@ -3,7 +3,7 @@ import com.sun.jdi.IntegerValue;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Library {
+public class Library implements Comparable{
 
     int signUpTime;
     int booksPerScan;
@@ -71,6 +71,12 @@ public class Library {
 
     public void sortBooksByScore() {
         Collections.sort(books);
+    }
+
+    @Override
+    public int compareTo(Object comparestu) {
+        Double compareage=((Library)comparestu).getWeight();
+        return (int) (compareage-this.weight);
     }
 
 
