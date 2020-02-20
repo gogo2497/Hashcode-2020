@@ -5,7 +5,12 @@ import java.util.Scanner;
 
 public class Main {
 
+    static int books;
+    static int libraries;
+    static int scanningDays;
+
     public static void main(String[] args) throws FileNotFoundException {
+
 
 //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
 //        String[] files= {"a_example.txt"};
@@ -13,9 +18,6 @@ public class Main {
 
         for(int i=0; i<files.length;i++) {
 
-            int books;
-            int libraries;
-            int scanningDays;
 
             String[] bookScores;
 
@@ -29,7 +31,14 @@ public class Main {
             bookScores = input.split(" ");
 
             System.out.println(bookScores);
+
+            for (int j = 0; j < libraries; j++) {
+                si
+            }
         }
 
     }
+
+
+
 }

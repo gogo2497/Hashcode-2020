@@ -12,6 +12,10 @@ public class Library {
         this.books = books;
     }
 
+    public void signup(Library library, int scanningDays) {
+        scanningDays -= library.signUpTime;
+    }
+
     public int getSignUpTime() {
         return signUpTime;
     }
