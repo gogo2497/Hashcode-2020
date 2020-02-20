@@ -120,6 +120,7 @@ public class Main {
 //                arrayOfWeightedLibraries[0].sign
                 //SIGN UP LIBRARY
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
+                libraryList.get(0).signed();
             }
 
             for (int i = 0; i < files.length; i++) {
