@@ -8,6 +8,8 @@ public class Main {
     static int books;
     static int libraries;
     static int scanningDays;
+    static int daysleft;
+    static double averageScoreOfBooks;
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -16,10 +18,11 @@ public class Main {
         String[] files= {"a_example.txt", "b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
+        String[] bookScores = null;
 
-        for(int i=0; i<files.length;i++) {
 
-            String[] bookScores;
+        for (int i = 0; i < files.length; i++) {
+
 
             Scanner fin = new Scanner(new File(files[i]));
 
@@ -46,9 +49,32 @@ public class Main {
 
         }
 
-        for (int i=0; i<libraryList.size(); i++) {
+        for (int i = 0; i < libraryList.size(); i++) {
             System.out.println(libraryList.get(i));
         }
+
+
+        // Weighting The libraries
+        averageScoreOfBooks = 0;
+        Long sum = null;
+        int numOfBooksLeft = 0;
+        for (int i = 0; i < bookScores.length; i++) {
+            if (bookScores[i] != null) {
+                sum = sum + Long.parseLong(bookScores[i]);
+                numOfBooksLeft++;
+            }
+        }
+        //Update Average score of books left
+        averageScoreOfBooks =  sum /averageScoreOfBooks;
+        // Create library que
+        double[] arrayOfWeights = new double[libraryList.size()];
+        arrayOfWeights = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
+
+        //Sign up a library from the que
+
+        //Scanning books
+
+
 
     }
 }
