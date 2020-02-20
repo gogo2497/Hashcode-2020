@@ -136,10 +136,10 @@ public class Main {
 
                 //repeat
                 for (int j = 0; j < libraryList.size(); j++) {
-                    myWriter.write(libraryList.get(j).ID);
-                    myWriter.write(" " + libraryList.get(j).scannedBooks.size() + "\n");
+                    myWriter.write(""+(libraryList.get(j).ID+1)+" ");
+                    myWriter.write(""+libraryList.get(j).scannedBooks.size()+"\n");
                     for (int k = 0; k < libraryList.get(j).scannedBooks.size(); k++) {
-                        myWriter.write(Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID));
+                        myWriter.write(""+Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID)+"");
                     }
                     myWriter.write("\n");
                 }
