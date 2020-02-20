@@ -1,6 +1,7 @@
 import com.sun.jdi.IntegerValue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Library {
 
@@ -42,6 +43,12 @@ public class Library {
     public void addBook(Book book) {
         books.add(book);
     }
+
+    public void sortBooksByScore() {
+        Collections.sort(books);
+    }
+
+
 
     @Override
     public String toString() {

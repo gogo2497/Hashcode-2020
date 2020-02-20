@@ -37,13 +37,20 @@ public class Main {
             for(int x=0; x < libraries; x++) {
                 input = fin.nextLine();    // get the entire line after the prompt
                 String[] libraryInfo = input.split(" ");
-                Library lib = new Library(libraryInfo[0], libraryInfo[1], libraryInfo[2]);
-                libraryList.add(lib);
 
-                input = fin.nextLine();    // get the entire line after the prompt
-                String[] booksInLibrary = input.split(" ");
-                for (int j = 0; j < booksInLibrary.length; j++) {
-                    lib.addBook(new Book(booksInLibrary[j], bookScores[j]));
+                // Check if library signup time is longer than days for scanning
+                if (Integer.parseInt(libraryInfo[1]) <= scanningDays) {
+                    Library lib = new Library(libraryInfo[0], libraryInfo[1], libraryInfo[2]);
+                    libraryList.add(lib);
+
+                    input = fin.nextLine();    // get the entire line after the prompt
+                    String[] booksInLibrary = input.split(" ");
+                    for (int j = 0; j < booksInLibrary.length; j++) {
+                        lib.addBook(new Book(booksInLibrary[j], bookScores[j]));
+                    }
+                    lib.sortBooksByScore();
+                } else {
+                    fin.nextLine();
                 }
             }
 
