@@ -1,22 +1,34 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
+//        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
+//        String[] files= {"a_example.txt"};
+        String[] files= {"a_example.txt", "b_read_on.txt"};
 
         for(int i=0; i<files.length;i++) {
 
+            int books;
+            int libraries;
+            int scanningDays;
+
+            String[] bookScores;
+
             Scanner fin = new Scanner(new File("Input Files" + File.separator + files[i]));
-            rows = fin.nextInt();
-            columns = fin.nextInt();
-            vehicles = fin.nextInt();
-            rides = fin.nextInt();
-            bonus = fin.nextInt();
-            steps = fin.nextInt();
+
+            books = fin.nextInt();
+            libraries = fin.nextInt();
+            scanningDays = fin.nextInt();
+
+            String input = fin.nextLine();    // get the entire line after the prompt
+            bookScores = input.split(" ");
+
+            System.out.println(bookScores);
         }
 
     }
