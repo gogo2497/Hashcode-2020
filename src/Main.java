@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-//        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
+        //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
 //        String[] files= {"a_example.txt"};
         String[] files= {"a_example.txt", "b_read_on.txt"};
 
@@ -44,9 +44,10 @@ public class Main {
                 }
             }
 
+        }
 
-
-
+        for (int i=0; i<libraryList.size(); i++) {
+            System.out.println(libraryList.get(i));
         }
 
     }
