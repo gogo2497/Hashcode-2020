@@ -1,15 +1,18 @@
+import com.sun.jdi.IntegerValue;
+
 import java.util.ArrayList;
 
 public class Library {
 
     int signUpTime;
     int booksPerScan;
+    int amountOfBooks;
     ArrayList<Book> books = new ArrayList<>();
 
-    public Library(int signUpTime, int booksPerScan, ArrayList<Book> books) {
-        this.signUpTime = signUpTime;
-        this.booksPerScan = booksPerScan;
-        this.books = books;
+    public Library(String amountOfBooks, String signUpTime, String booksPerScan) {
+        this.signUpTime = Integer.parseInt(signUpTime);
+        this.booksPerScan = Integer.parseInt(booksPerScan);
+        this.amountOfBooks = Integer.parseInt(amountOfBooks);
     }
 
     public int getSignUpTime() {
@@ -34,5 +37,9 @@ public class Library {
 
     public void setBooks(ArrayList<Book> books) {
         this.books = books;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
     }
 }
