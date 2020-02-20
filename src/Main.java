@@ -95,6 +95,7 @@ public class Main {
         for (daysleft = scanningDays; daysleft > 0; daysleft--) {
             if (daysLeftForSigningUp > 0) {
                 daysLeftForSigningUp--;
+
             } else {
                 currentlySigningUp = false;
             }
@@ -115,6 +116,7 @@ public class Main {
 
             //Sign up a library from the que
             if (!currentlySigningUp) {
+                currentlySigningUp = true;
                 // Create library que
                 WeightCalculation.assignAllLibrariesWeights(libraryList, daysleft, averageScoreOfBooks);
 //                arrayOfWeightedLibraries[0].sign
