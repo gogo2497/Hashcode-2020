@@ -19,7 +19,6 @@ public class Main {
 
         for(int i=0; i<files.length;i++) {
 
-
             String[] bookScores;
 
             Scanner fin = new Scanner(new File(files[i]));
@@ -45,7 +44,10 @@ public class Main {
                 }
             }
 
+        }
 
+        for (int i=0; i<libraryList.size(); i++) {
+            System.out.println(libraryList.get(i));
 
 
             System.out.println(bookScores);

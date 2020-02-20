@@ -46,4 +46,14 @@ public class Library {
     public void addBook(Book book) {
         books.add(book);
     }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "signUpTime=" + signUpTime +
+                ", booksPerScan=" + booksPerScan +
+                ", amountOfBooks=" + amountOfBooks +
+                ", books=" + books +
+                '}';
+    }
 }

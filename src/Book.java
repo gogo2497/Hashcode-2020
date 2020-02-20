@@ -3,9 +3,9 @@ public class Book {
     Long ID;
     Long score;
 
-    public Book(Long ID, Long score) {
-        this.ID = ID;
-        this.score = score;
+    public Book(String ID, String score) {
+        this.ID = Long.parseLong(ID);
+        this.score = Long.parseLong(score);
     }
 
     public Long getID() {
@@ -22,5 +22,13 @@ public class Book {
 
     public void setScore(Long score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "ID=" + ID +
+                ", score=" + score +
+                '}';
     }
 }
