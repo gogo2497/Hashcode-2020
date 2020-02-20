@@ -1,4 +1,4 @@
-public class Book {
+public class Book implements Comparable{
 
     Long ID;
     Long score;
@@ -22,6 +22,12 @@ public class Book {
 
     public void setScore(Long score) {
         this.score = score;
+    }
+
+    @Override
+    public int compareTo(Object comparestu) {
+        Long compareage=((Book)comparestu).getScore();
+        return (int) (compareage-this.score);
     }
 
     @Override
