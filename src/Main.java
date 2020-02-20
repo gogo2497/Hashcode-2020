@@ -111,12 +111,12 @@ public class Main {
             }
             //Update Average score of books left
             averageScoreOfBooks = sum / averageScoreOfBooks;
-            // Create library que
-            Double[] arrayOfWeightedLibraries = new Double[libraryList.size()];
-            arrayOfWeightedLibraries = WeightCalculation.getLibraryQue(libraryList, daysleft, averageScoreOfBooks);
+
 
             //Sign up a library from the que
             if (!currentlySigningUp) {
+                // Create library que
+                WeightCalculation.assignAllLibrariesWeights(libraryList, daysleft, averageScoreOfBooks);
 //                arrayOfWeightedLibraries[0].sign
                 //SIGN UP LIBRARY
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
