@@ -101,7 +101,7 @@ public class Main {
 
             // Weighting The libraries
             averageScoreOfBooks = 0;
-            Long sum = null;
+            Long sum = 0L;
             int numOfBooksLeft = 0;
             for (int i = 0; i < bookScores.length; i++) {
                 if (bookScores[i] != null) {
