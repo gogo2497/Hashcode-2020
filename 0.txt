@@ -1,0 +1,3 @@
+Amount of libs to be signed up
+which lib and how many books?
+scan these books from the above lib

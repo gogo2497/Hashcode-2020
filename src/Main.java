@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,11 +13,11 @@ public class Main {
     static int daysleft;
     static double averageScoreOfBooks;
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException, FileNotFoundException {
 
         //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
-//        String[] files= {"a_example.txt"};
-        String[] files= {"a_example.txt", "b_read_on.txt"};
+        String[] files= {"a_example.txt"};
+//        String[] files= {"a_example.txt", "b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
         String[] bookScores = null;
@@ -92,7 +94,17 @@ public class Main {
 
             }
 
-            //Scanning books
+        for(int i=0; i<files.length;i++) {
+
+            FileWriter myWriter = new FileWriter(i + ".txt");
+            myWriter.write("Amount of libs to be signed up\n");
+
+            //repeat
+//            for (int j = 0; j < listOfLibraries; j++) {
+//                myWriter.write("which lib and how many books?\n");
+//                myWriter.write("scan these books from the above lib\n");
+//            }
+            myWriter.close();
         }
     }
 }
