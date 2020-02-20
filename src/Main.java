@@ -63,7 +63,7 @@ public class Main {
         }
 
         // Create the loop for the days ongoing
-        for(daysleft = scanningDays; daysleft > 0; daysleft--){
+        for(daysleft = scanningDays; daysleft > 0; daysleft--) {
             // Weighting The libraries
             averageScoreOfBooks = 0;
             Long sum = null;
@@ -75,14 +75,14 @@ public class Main {
                 }
             }
             //Update Average score of books left
-            averageScoreOfBooks =  sum /averageScoreOfBooks;
+            averageScoreOfBooks = sum / averageScoreOfBooks;
             // Create library que
             double[] arrayOfWeights = new double[libraryList.size()];
-            arrayOfWeights = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
+            arrayOfWeights = WeightCalculation.getLibraryQue(libraryList, daysleft, averageScoreOfBooks);
 
 
             //Sign up a library from the que
-
+        }
         //File writer
 
         for(int i=0; i<files.length;i++) {
