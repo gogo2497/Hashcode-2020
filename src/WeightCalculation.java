@@ -7,7 +7,7 @@ public abstract class WeightCalculation {
 //    int NumberOfDays = 123;
 //    double AverageScoreOfBooks =12.3;
 
-    public double getLibraryWeight(Library lib, int daysLeft, double averageScoreOfBooks){
+    public static double getLibraryWeight(Library lib, int daysLeft, double averageScoreOfBooks){
         long maximumBooksTakenFromLibrary = lib.books.size() -
                 (daysLeft - lib.getSignUpTime()) * lib.getBooksPerScan(); // Number of days can be the days that are currently left or the initial days
         if(maximumBooksTakenFromLibrary < 0){
