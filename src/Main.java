@@ -60,28 +60,27 @@ public class Main {
             System.out.println(libraryList.get(i));
         }
 
-
-        // Weighting The libraries
-        averageScoreOfBooks = 0;
-        Long sum = null;
-        int numOfBooksLeft = 0;
-        for (int i = 0; i < bookScores.length; i++) {
-            if (bookScores[i] != null) {
-                sum = sum + Long.parseLong(bookScores[i]);
-                numOfBooksLeft++;
+        // Create the loop for the days ongoing
+        for(daysleft = scanningDays; daysleft > 0; daysleft--){
+            // Weighting The libraries
+            averageScoreOfBooks = 0;
+            Long sum = null;
+            int numOfBooksLeft = 0;
+            for (int i = 0; i < bookScores.length; i++) {
+                if (bookScores[i] != null) {
+                    sum = sum + Long.parseLong(bookScores[i]);
+                    numOfBooksLeft++;
+                }
             }
+            //Update Average score of books left
+            averageScoreOfBooks =  sum /averageScoreOfBooks;
+            // Create library que
+            double[] arrayOfWeights = new double[libraryList.size()];
+            arrayOfWeights = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
+
+            //Sign up a library from the que
+
+            //Scanning books
         }
-        //Update Average score of books left
-        averageScoreOfBooks =  sum /averageScoreOfBooks;
-        // Create library que
-        double[] arrayOfWeights = new double[libraryList.size()];
-        arrayOfWeights = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
-
-        //Sign up a library from the que
-
-        //Scanning books
-
-
-
     }
 }
