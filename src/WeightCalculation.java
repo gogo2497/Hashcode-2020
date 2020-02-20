@@ -11,6 +11,10 @@ public abstract class WeightCalculation {
     public static void assignLibraryWeight(Library lib, int daysLeft, double averageScoreOfBooks){
         long maximumBooksTakenFromLibrary = lib.books.size() -
                 (daysLeft - lib.getSignUpTime()) * lib.getBooksPerScan(); // Number of days can be the days that are currently left or the initial days
+
+        if(lib.isSigned){
+            lib.setWeight(0);
+        }
         if(maximumBooksTakenFromLibrary < 0){
             double weight = lib.getBooks().size() * averageScoreOfBooks;
             lib.setWeight(weight);

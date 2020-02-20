@@ -22,6 +22,7 @@ public class Main {
         String[] files= {"b_read_on.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
+        ArrayList<Library> libraryListEndingOrder = new ArrayList<>();
         String[] bookScores = null;
 
 
@@ -125,6 +126,7 @@ public class Main {
                 Collections.sort(libraryList);
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
                 libraryList.get(0).signed();
+                libraryListEndingOrder.add(libraryList.get(0));
 
 
             }
