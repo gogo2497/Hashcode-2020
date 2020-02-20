@@ -67,14 +67,14 @@ public class Main {
         /*
             We need to sort the arraylist of libraries
          */
-//        for (int j = 0; j < libraryList.size(); j++) {
-//            if (leftDaysScanning < libraryList.get(j).getSignUpTime()) {
-//                continue;
-//            } else {
-//                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
-//                libraryList.get(j).signed();
-//            }
-//        }
+        for (int j = 0; j < libraryList.size(); j++) {
+            if (leftDaysScanning < libraryList.get(j).getSignUpTime()) {
+                continue;
+            } else {
+                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
+                libraryList.get(j).signed();
+            }
+        }
 
         for (int m = 0; m < libraryList.size(); m++) {
             if (libraryList.get(m).isSigned) {
@@ -121,19 +121,8 @@ public class Main {
 //                arrayOfWeightedLibraries[0].sign
                 //SIGN UP LIBRARY
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
-                Collections.sort(libraryList);
+                libraryList.get(0).signed();
             }
-
-
-
-
-
-
-
-
-
-
-
 
             for (int i = 0; i < files.length; i++) {
 
