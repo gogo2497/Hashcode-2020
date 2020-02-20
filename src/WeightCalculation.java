@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public abstract class WeightCalculation {
@@ -11,20 +12,26 @@ public abstract class WeightCalculation {
         long maximumBooksTakenFromLibrary = lib.books.size() -
                 (daysLeft - lib.getSignUpTime()) * lib.getBooksPerScan(); // Number of days can be the days that are currently left or the initial days
         if(maximumBooksTakenFromLibrary < 0){
-            return lib.getBooks().size() * averageScoreOfBooks; //averageScoreOfBooks is the total score of books divided by the number of books
+            double weight = lib.getBooks().size() * averageScoreOfBooks;
+            lib.setWeight(weight);
+            return weight; //averageScoreOfBooks is the total score of books divided by the number of books
         } else{
-            return (lib.books.size() - maximumBooksTakenFromLibrary) * averageScoreOfBooks; //averageScoreOfBooks is the total score of books divided by the number of books
+            double weight =(lib.books.size() - maximumBooksTakenFromLibrary) * averageScoreOfBooks;
+            lib.setWeight(weight);
+            return weight; //averageScoreOfBooks is the total score of books divided by the number of books
         }
     }
 
-    public static double[] getLibraryQue(ArrayList<Library> libraryList,int daysLeft, double AverageScoreOfBooks){
-        double[] arrayOfWeights = new double[libraryList.size()];
+    public static Double[] getLibraryQue(ArrayList<Library> libraryList,int daysLeft, double AverageScoreOfBooks){
+        Double[] arrayOfWeights = new Double[libraryList.size()];
         for(int i=0; i < libraryList.size(); i++){
             arrayOfWeights[i] = getLibraryWeight(libraryList.get(i), daysLeft, AverageScoreOfBooks);
         }
         // Sort the array
-        Arrays.sort(arrayOfWeights);
+        Arrays.sort(arrayOfWeights, Collections.reverseOrder());
         return arrayOfWeights;
         }
+
+
 
 }

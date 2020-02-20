@@ -40,7 +40,7 @@ public class Main {
 
                 // Check if library signup time is longer than days for scanning
                 if (Integer.parseInt(libraryInfo[1]) <= scanningDays) {
-                    Library lib = new Library(libraryInfo[0], libraryInfo[1], libraryInfo[2]);
+                    Library lib = new Library(libraryInfo[0], libraryInfo[1], libraryInfo[2], x);
                     libraryList.add(lib);
 
                     input = fin.nextLine();    // get the entire line after the prompt
@@ -61,7 +61,15 @@ public class Main {
         }
 
         // Create the loop for the days ongoing
+        boolean currentlyScanning = false;
+        int daysLeftForScanning = 0;
         for(daysleft = scanningDays; daysleft > 0; daysleft--){
+            if ( daysLeftForScanning > 0 ){
+                daysLeftForScanning--;
+            } else {
+                currentlyScanning = false;
+            }
+
             // Weighting The libraries
             averageScoreOfBooks = 0;
             Long sum = null;
@@ -75,10 +83,14 @@ public class Main {
             //Update Average score of books left
             averageScoreOfBooks =  sum /averageScoreOfBooks;
             // Create library que
-            double[] arrayOfWeights = new double[libraryList.size()];
-            arrayOfWeights = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
+            Double[] arrayOfWeightedLibraries = new Double[libraryList.size()];
+            arrayOfWeightedLibraries = WeightCalculation.getLibraryQue(libraryList,daysleft,averageScoreOfBooks);
 
             //Sign up a library from the que
+            if( ! currentlyScanning){
+//                arrayOfWeightedLibraries[0].sign
+
+            }
 
             //Scanning books
         }
