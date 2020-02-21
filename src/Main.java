@@ -1,10 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -16,10 +16,15 @@ public class Main {
     static double averageScoreOfBooks;
 
     public static void main(String[] args) throws IOException, FileNotFoundException {
+        FileWriter myWriter = null;
 
-//        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt" };
+//        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt",  "e_so_many_books.txt", "f_libraries_of_the_world.txt"};
 //        String[] files= {"a_example.txt"};
-        String[] files= {"b_read_on.txt"};
+        String[] files = {"b_read_on.txt"};
+//        String[] files = {"c_incunabula.txt"};
+//        String[] files = {"d_tough_choices.txt"};
+//        String[] files = {"e_so_many_books.txt"};
+//        String[] files = {"f_libraries_of_the_world.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
         ArrayList<Library> libraryListEndingOrder = new ArrayList<>();
@@ -61,9 +66,9 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < libraryList.size(); i++) {
-            System.out.println(libraryList.get(i));
-        }
+//        for (int i = 0; i < libraryList.size(); i++) {
+//            System.out.println(libraryList.get(i));
+//        }
 
         /*
             We need to sort the arraylist of libraries
@@ -127,26 +132,48 @@ public class Main {
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
                 libraryList.get(0).signed();
                 libraryListEndingOrder.add(libraryList.get(0));
-
-
             }
 
-            for (int i = 0; i < files.length; i++) {
+//            ArrayList<Library> clone = (ArrayList<Library>) libraryList.clone();
+//
+//            for (int j = 0; j < clone.size(); j++) {
+//                if (clone.get(j).scannedBooks.size() == 0) {
+//                    Library k = clone.get(j);
+////                    System.out.println(libraryList.size());
+////                    System.out.println(clone.size());
+////                    System.out.println(j);
+//                    libraryList.remove(k);
+//                }
+//            }
 
-                FileWriter myWriter = new FileWriter(i + ".txt");
-                myWriter.write(libraryList.size() + "\n");
+            libraryList.removeIf(i -> i.scannedBooks.size() == 0);
 
-                //repeat
-                for (int j = 0; j < libraryList.size(); j++) {
-                    myWriter.write(""+(libraryList.get(j).ID+1)+" ");
-                    myWriter.write(""+libraryList.get(j).scannedBooks.size()+"\n");
+        }
+
+
+        for (int i = 0; i < files.length; i++) {
+
+            PrintWriter writer = new PrintWriter(i + ".txt", StandardCharsets.UTF_8);
+            writer.println(libraryList.size());
+            int bob = 0;
+            //repeat
+            for (int j = 0; j < libraryList.size(); j++) {
+                if (libraryList.get(j).scannedBooks.size() != 0) {
+                    writer.print((libraryList.get(j).ID) + " ");
+                    writer.println(libraryList.get(j).scannedBooks.size());
                     for (int k = 0; k < libraryList.get(j).scannedBooks.size(); k++) {
-                        myWriter.write(""+Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID)+"");
+                        writer.print(Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID) + " ");
                     }
-                    myWriter.write("\n");
+                } else {
+                    bob += 1;
                 }
-                myWriter.close();
+                if (j < libraryList.size() - 1) {
+                    writer.println();
+                }
+
             }
+            writer.close();
+            System.out.println(bob);
         }
     }
 }
