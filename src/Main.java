@@ -1,9 +1,6 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -20,11 +17,11 @@ public class Main {
 
 //        String[] files= {"a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt",  "e_so_many_books.txt", "f_libraries_of_the_world.txt"};
 //        String[] files= {"a_example.txt"};
-        String[] files = {"b_read_on.txt"};
+//        String[] files = {"b_read_on.txt"};
 //        String[] files = {"c_incunabula.txt"};
 //        String[] files = {"d_tough_choices.txt"};
 //        String[] files = {"e_so_many_books.txt"};
-//        String[] files = {"f_libraries_of_the_world.txt"};
+        String[] files = {"f_libraries_of_the_world.txt"};
 
         ArrayList<Library> libraryList = new ArrayList<>();
         String[] bookScores = null;
@@ -66,28 +63,74 @@ public class Main {
         }
 
 
-        /*
-            We need to sort the arraylist of libraries
-         */
-        for (int j = 0; j < libraryList.size(); j++) {
-            if (libraryList.get(j).getSignUpTime() < leftDaysScanning ) {
-                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
-                libraryList.get(j).signed();
-            }
-        }
+        // Create the loop for the days ongoing
+        boolean currentlySigningUp = false;
+        int daysLeftForSigningUp = 0;
+        for (daysleft = scanningDays; daysleft > 0; daysleft--) {
+            if (daysLeftForSigningUp > 0) {
+                daysLeftForSigningUp--;
+            } else {
+                // let the library scan books from now on and allow a new library to sign up
+                currentlySigningUp = false;
+                if(scanningDays != daysleft){
+                    libraryList.get(libraries-1).signed();
+//                    System.out.println("Library ID = "+ libraryList.get(0).ID + " Library weight = "
+//                            + libraryList.get(libraries-1).weight + " Days left: " + daysleft);
+                }
 
-        for (int m = 0; m < libraryList.size(); m++) {
-            if (libraryList.get(m).isSigned) {
-                // You can scan books here
-                for (int k = 0; k < libraryList.get(m).getBooks().size(); k++) {
-                    int bookId = Math.toIntExact(libraryList.get(m).getBooks().get(k).getID());
-                    if (bookScores[bookId] != null) {
-                        bookScores[bookId] = null;
-                        libraryList.get(m).addScannedBook(libraryList.get(m).getBooks().get(k));
+
+            }
+
+            // Weighting The libraries
+            averageScoreOfBooks = 0;
+            Long sum = 0L;
+            int numOfBooksLeft = 0;
+            for (int i = 0; i < bookScores.length; i++) {
+                if (bookScores[i] != null) {
+                    sum = sum + Long.parseLong(bookScores[i]);
+                    numOfBooksLeft++;
+                }
+            }
+            //Update Average score of books left
+            averageScoreOfBooks = sum / averageScoreOfBooks;
+
+
+            //Create a new weighted list. Sign up the library with the biggest weight and add it to the signing up
+            if (!currentlySigningUp) {
+                // Calculate weights on library list
+                WeightCalculation.assignAllLibrariesWeights(libraryList, daysleft, averageScoreOfBooks);
+                //SORT THE libraryList
+                Collections.sort(libraryList);
+//                System.out.println("Library ID = "+ libraryList.get(0).ID + " Library weight = "
+//                        + libraryList.get(0).weight);
+                daysLeftForSigningUp = libraryList.get(libraries-1).getSignUpTime(); // CHANGE THE LIBRARY LIST
+                currentlySigningUp = true;
+                System.out.println("Library ID = "+ libraryList.get(0).ID + " Library weight = "
+                        + libraryList.get(libraries-1).weight + " Days left: " + daysleft);
+            }
+
+            for (int m = 0; m < libraryList.size(); m++) {
+                if (libraryList.get(m).isSigned) {
+                    // You can scan books here
+                    for (int k = 0; k < libraryList.get(m).getBooks().size(); k++) {
+                        int bookId = Math.toIntExact(libraryList.get(m).getBooks().get(k).getID());
+                        if (bookScores[bookId] != null) {
+                            bookScores[bookId] = null;
+                            libraryList.get(m).addScannedBook(libraryList.get(m).getBooks().get(k));
+                        }
                     }
                 }
             }
         }
+//        for (int i = 0; i < libraryList.size(); i++) {
+//            if (libraryList.get(i).isSigned) {
+//                System.out.println(libraryList.get(i).ID);
+//            }
+//
+//        }
+//        for (int i = 0; i < libraryList.size(); i++) {
+//            System.out.println(libraryList.get(i).weight);
+//        }
 
         libraryList.removeIf(i -> i.scannedBooks.size() == 0);
 

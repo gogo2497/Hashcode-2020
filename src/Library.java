@@ -10,7 +10,7 @@ public class Library implements Comparable<Library>{
     int amountOfBooks;
     boolean isSigned = false;
     int ID;
-    double weight;
+    double weight = 0;
     ArrayList<Book> books = new ArrayList<>();
     ArrayList<Book> scannedBooks = new ArrayList<>();
 
@@ -73,16 +73,26 @@ public class Library implements Comparable<Library>{
         Collections.sort(books);
     }
 
+
     @Override
-    public int compareTo(Library comparestu) {
-        if (comparestu.getWeight() < this.getWeight()) {
-            return -1;
-        } else if (this.getWeight() > comparestu.getWeight()) {
-            return 1;
-        } else {
-            return -1;
-        }
+    public int compareTo(Library o) {
+        return (int) (this.getWeight() - o.getWeight());
     }
+//    @Override
+//    public int compareTo(Library comparestu) {
+//        if (comparestu.getWeight() < this.getWeight()) {
+//            return -1;
+//        } else if (this.getWeight() > comparestu.getWeight()) {
+//            return 1;
+//        } else {
+//            return -1;
+//        }
+//    }
+//
+//    @Override
+//    public int compareTo(Library comparestu) {
+//        toString().compareTo(o.toString());
+//    }
 
 
 
