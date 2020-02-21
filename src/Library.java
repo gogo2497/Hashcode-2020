@@ -76,9 +76,9 @@ public class Library implements Comparable<Library>{
     @Override
     public int compareTo(Library comparestu) {
         if (comparestu.getWeight() < this.getWeight()) {
-            return 1;
-        } else if (this.getWeight() > comparestu.getWeight()) {
             return -1;
+        } else if (this.getWeight() > comparestu.getWeight()) {
+            return 1;
         } else {
             return -1;
         }
