@@ -1,7 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -65,32 +63,22 @@ public class Main {
             System.out.println(libraryList.get(i));
         }
 
-        /*
-            We need to sort the arraylist of libraries
-         */
-        for (int j = 0; j < libraryList.size(); j++) {
-            if (leftDaysScanning < libraryList.get(j).getSignUpTime()) {
-                continue;
-            } else {
-                leftDaysScanning = leftDaysScanning - libraryList.get(j).getSignUpTime();
-                libraryList.get(j).signed();
-            }
-        }
-
-        for (int m = 0; m < libraryList.size(); m++) {
-            if (libraryList.get(m).isSigned) {
-                // You can scan books here
-                for (int k = 0; k < libraryList.get(m).getBooks().size(); k++) {
-                    int bookId = Math.toIntExact(libraryList.get(m).getBooks().get(k).getID());
-                    if (bookScores[bookId] != null) {
-                        bookScores[bookId] = null;
-                        libraryList.get(m).addScannedBook(libraryList.get(m).getBooks().get(k));
-                    } else {
-                        continue;
-                    }
-                }
-            }
-        }
+//        for (int m = 0; m < libraryList.size(); m++) {
+//            if (libraryList.get(m).isSigned) {
+//                // You can scan books here
+//                for (int k = 0; k < libraryList.get(m).getBooks().size(); k++) {
+//                    int bookId = Math.toIntExact(libraryList.get(m).getBooks().get(k).getID());
+//                    if (bookScores[bookId] != null) {
+//                        bookScores[bookId] = null;
+//
+//
+//                        libraryList.get(m).addScannedBook(libraryList.get(m).getBooks().get(k));
+//                    } else {
+//                        continue;
+//                    }
+//                }
+//            }
+//        }
         // Create the loop for the days ongoing
         boolean currentlySigningUp = false;
         int daysLeftForSigningUp = 0;
@@ -127,26 +115,59 @@ public class Main {
                 daysLeftForSigningUp = libraryList.get(0).getSignUpTime(); // CHANGE THE LIBRARY LIST
                 libraryList.get(0).signed();
                 libraryListEndingOrder.add(libraryList.get(0));
-
-
             }
 
-            for (int i = 0; i < files.length; i++) {
-
-                FileWriter myWriter = new FileWriter(i + ".txt");
-                myWriter.write(libraryList.size() + "\n");
-
-                //repeat
-                for (int j = 0; j < libraryList.size(); j++) {
-                    myWriter.write(""+(libraryList.get(j).ID+1)+" ");
-                    myWriter.write(""+libraryList.get(j).scannedBooks.size()+"\n");
-                    for (int k = 0; k < libraryList.get(j).scannedBooks.size(); k++) {
-                        myWriter.write(""+Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID)+"");
+            for (int m = 0; m < libraryListEndingOrder.size(); m++) {
+                // You can scan books here
+                for (int k = 0; k < libraryListEndingOrder.get(m).getBooksPerScan(); k++) {
+                    int bookId = Math.toIntExact(libraryListEndingOrder.get(m).getBooks().get(k).getID());
+                    if (bookScores[bookId] != null) {
+                        bookScores[bookId] = null;
+                        libraryList.get(m).addScannedBook(libraryList.get(m).getBooks().get(k));
                     }
-                    myWriter.write("\n");
                 }
-                myWriter.close();
             }
+        }
+
+//        for (int i = 0; i < files.length; i++) {
+//
+//            FileWriter myWriter = new FileWriter(i + ".txt");
+//            myWriter.write(libraryList.size() + "\n");
+//
+//            //repeat
+//            for (int j = 0; j < libraryList.size(); j++) {
+//                myWriter.write(""+(libraryList.get(j).ID+1)+" ");
+//                myWriter.write(""+libraryList.get(j).scannedBooks.size()+"\n");
+//                for (int k = 0; k < libraryList.get(j).scannedBooks.size(); k++) {
+//                    myWriter.write(""+Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID)+" ");
+//                }
+//                myWriter.write("\n");
+//            }
+//            myWriter.close();
+//        }
+        for (int i = 0; i < files.length; i++) {
+
+            PrintWriter writer = new PrintWriter(i + ".txt", StandardCharsets.UTF_8);
+            writer.println(libraryList.size());
+            int bob = 0;
+            //repeat
+            for (int j = 0; j < libraryList.size(); j++) {
+                if (libraryList.get(j).scannedBooks.size() != 0) {
+                    writer.print((libraryList.get(j).ID) + " ");
+                    writer.println(libraryList.get(j).scannedBooks.size());
+                    for (int k = 0; k < libraryList.get(j).scannedBooks.size(); k++) {
+                        writer.print(Math.toIntExact(libraryList.get(j).scannedBooks.get(k).ID) + " ");
+                    }
+                } else {
+                    bob += 1;
+                }
+                if (j < libraryList.size() - 1) {
+                    writer.println();
+                }
+
+            }
+            writer.close();
+            System.out.println(bob);
         }
     }
 }
